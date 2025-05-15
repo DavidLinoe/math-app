@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --text-color: #333;
+  --primary-color: #3498db;
+  --primary-color-dark: #1c7bba;
+  --primary-color-light: #3fa4e8;
+  --primary-text-color: #fcfcfc;
+  --danger-color: #ef4444;
+}
+
+.js-plotly-plot .plotly .modebar-btn {
+  display: none !important;
+}
+
+.card {
+  padding: 30px;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", serif;
+  font-weight: 600;
+}
+button {
+  transition: all 0.1s ease-in;
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  border-style: none;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.1);
+}

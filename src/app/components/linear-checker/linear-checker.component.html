@@ -1,0 +1,14 @@
+<div class="vector-inputs">
+  <div *ngFor="let v of vectors; let i = index">
+    <label>v{{ i + 1 }} = </label>
+    <input type="number" [(ngModel)]="vectors[i].x" placeholder="x" />
+    <input type="number" [(ngModel)]="vectors[i].y" placeholder="y" />
+    <input type="number" [(ngModel)]="vectors[i].z" placeholder="z" />
+  </div>
+</div>
+
+<button (click)="verify()">Verificar LD/LI</button>
+
+<p>Resultado: <strong>{{ result }}</strong></p>
+
+<div id="plot" style="width: 100%; height: 400px;"></div>
