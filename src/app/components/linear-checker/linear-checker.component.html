@@ -1,14 +1,80 @@
-<div class="vector-inputs">
-  <div *ngFor="let v of vectors; let i = index">
-    <label>v{{ i + 1 }} = </label>
-    <input type="number" [(ngModel)]="vectors[i].x" placeholder="x" />
-    <input type="number" [(ngModel)]="vectors[i].y" placeholder="y" />
-    <input type="number" [(ngModel)]="vectors[i].z" placeholder="z" />
+<div class="container">
+  <div class="main-content">
+    <h1>Verificador de Dependência/Independência Linear</h1>
+
+    <div class="vector-inputs">
+      <h2>Entrada dos Vetores (3D)</h2>
+      <div *ngFor="let v of vectors; let i = index" class="vector-input-group">
+        <label>v{{ i + 1 }}:</label>
+        <div class="inputs-row">
+          <input type="number" [(ngModel)]="vectors[i].x" placeholder="X" />
+          <input type="number" [(ngModel)]="vectors[i].y" placeholder="Y" />
+          <input type="number" [(ngModel)]="vectors[i].z" placeholder="Z" />
+        </div>
+      </div>
+    </div>
+
+    <button (click)="verify()">Verificar LD/LI</button>
+
+    <div class="result">
+      <h3>Resultado:</h3>
+      <p [class.ld]="result.includes('LD')" [class.li]="result.includes('LI')">
+        <strong>{{ result }}</strong>
+      </p>
+    </div>
+
+    <div id="plot" class="plot-container"></div>
+  </div>
+
+  <div class="sidebar">
+    <h2>Como o Algoritmo Verifica LD/LI?</h2>
+    <p>
+      Para determinar se um conjunto de vetores é Linearmente Dependente (LD)
+      ou Linearmente Independente (LI), o algoritmo segue os seguintes passos:
+    </p>
+    <ol>
+      <li>
+        <strong>Coleta de Vetores:</strong> Primeiro, o algoritmo recebe os
+        componentes (X, Y, Z) de cada vetor. Neste caso, esperamos 3 vetores 3D.
+      </li>
+      <li>
+        <strong>Criação da Matriz:</strong> Em seguida, esses vetores são
+        organizados em uma matriz. Cada vetor se torna uma linha (ou coluna,
+        dependendo da convenção) da matriz. Por exemplo, para vetores $v1 = (x1, y1, z1)$,
+        $v2 = (x2, y2, z2)$ e $v3 = (x3, y3, z3)$, a matriz será:
+        <p [innerHTML]="'$$' + matrixLatex + '$$'"></p>
+      </li>
+      <li>
+        <strong>Cálculo do Determinante:</strong> O passo crucial é calcular o
+        **determinante** dessa matriz. O determinante é um valor
+        escalar que pode ser calculado para matrizes quadradas (número de
+        linhas igual ao número de colunas). Para uma matriz $3 \times 3$, a fórmula é:
+        <p [innerHTML]="'$$' + determinantLatex + '$$'"></p>
+        Onde <span [innerHTML]="'$' + inlineLatex + '$'"></span> representa o elemento na linha $i$ e coluna $j$ da matriz.
+      </li>
+      <li>
+        <strong>Verificação do Resultado:</strong>
+        <ul>
+          <li>
+            <strong>Se $determinante === 0$:</strong> Os vetores são
+            <strong>Linearmente Dependentes (LD)</strong>. Isso significa que
+            pelo menos um dos vetores pode ser expresso como uma combinação
+            linear dos outros, ou, geometricamente, os vetores estão no mesmo
+            plano (ou linha) passando pela origem.
+          </li>
+          <li>
+            <strong>Se $determinante \neq 0$:</strong> Os vetores são
+            <strong>Linearmente Independentes (LI)</strong>. Isso indica que
+            nenhum dos vetores pode ser escrito como uma combinação linear dos
+            outros. Geometricamente, em um espaço 3D, três vetores LI formam um
+            "espaço" e não estão confinados a um único plano.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Visualização:</strong> Finalmente, os vetores são plotados em um
+        gráfico 3D para uma representação visual do seu arranjo espacial.
+      </li>
+    </ol>
   </div>
 </div>
-
-<button (click)="verify()">Verificar LD/LI</button>
-
-<p>Resultado: <strong>{{ result }}</strong></p>
-
-<div id="plot" style="width: 100%; height: 400px;"></div>

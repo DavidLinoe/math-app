@@ -8,6 +8,21 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+   <script>
+    // Minimal MathJax configuration (adjust as needed for your project)
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']] // Defines inline math delimiters
+      },
+      svg: {
+        fontCache: 'global' // Consider 'local' or remove for specific use cases
+      },
+      // Optional: Disable MathJax auto-typesetting on load if you want full control
+      // startup: {
+      //   typeset: false
+      // }
+    };
+  </script>
   <app-root></app-root>
 </body>
 </html>
