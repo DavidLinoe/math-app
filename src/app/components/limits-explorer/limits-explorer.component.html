@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="input-section">
+    <h1>Explorador de Limites</h1>
+    <div class="form-group">
+      <label for="function-select">Selecione uma função</label>
+      <select id="function-select" [(ngModel)]="selectedFunctionKey" (change)="onFunctionChange()">
+        <option *ngFor="let fn of functions" [value]="fn.key">{{ fn.label }}</option>
+        <option value="custom">Função Personalizada</option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="selectedFunctionKey === 'custom'">
+      <label for="custom-input">Digite a sua expressão f(x)</label>
+      <input id="custom-input" type="text" [(ngModel)]="customFunctionExpression" (keyup)="recalculateAndDraw()" placeholder="Ex: (x^2 - 4) / (x - 2)">
+      <small>Use 'x' como a variável. Ex: `2*x^3`</small>
+    </div>
+
+    <div class="form-group">
+      <label for="point-input">Ponto a</label>
+      <input id="point-input" type="number" [(ngModel)]="pointOfApproach" (change)="recalculateAndDraw()">
+    </div>
+  </div>
+
+  <div class="visualization-section">
+    <div id="graph-container"></div>
+  </div>
+
+  <div class="results-section">
+    <h2>Resultados</h2>
+    <div class="result-box">
+      <p>Quando x → {{ pointOfApproach }} pela esquerda, f(x) → <span class="result">{{ limitLeft | number:'1.4-4' }}</span></p>
+    </div>
+    <div class="result-box">
+      <p>Quando x → {{ pointOfApproach }} pela direita, f(x) → <span class="result">{{ limitRight | number:'1.4-4' }}</span></p>
+    </div>
+    <div class="final-result">
+      <h3>Limite de f(x) quando x → {{ pointOfApproach }} = {{ finalLimit }}</h3>
+    </div>
+  </div>
+</div>
